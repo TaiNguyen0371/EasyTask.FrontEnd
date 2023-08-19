@@ -1,0 +1,236 @@
+.container{
+    width: 90% !important;
+    max-width: initial;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 3rem;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    z-index: 1;
+}
+
+.workspace-nav{
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 1rem;
+
+}
+
+.workspace-name{
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.dropdown-toggle{
+    background-color: #48CAED;
+    border: none;
+}
+
+.dropdown-toggle:hover {
+    background-color: #2A8BEA;
+}
+
+.workspace-main {
+    height: 35rem;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+
+.workspace-main::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.workspace-main::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.workspace-main::-webkit-scrollbar-thumb:hover {
+    background-color: #ccc;
+}
+
+.workspace-main::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.workspace-main::-webkit-scrollbar-track:hover {
+    background-color: #f2f2f2;
+}
+
+.workspace-main::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+.workspace-main::-webkit-scrollbar-thumb:vertical {
+    background-color: #999;
+}
+
+.workspace-main::-webkit-scrollbar-thumb:vertical:active {
+    background-color: #555;
+}
+
+.workspace-main::-webkit-scrollbar-thumb:vertical:hover {
+    background-color: #777;
+}
+
+.workspace-main::-webkit-scrollbar-thumb:horizontal {
+    background-color: transparent;
+}
+
+.workspace-main::-webkit-scrollbar-thumb:horizontal:active {
+    background-color: transparent;
+}
+
+.workspace-main::-webkit-scrollbar-thumb:horizontal:hover {
+    background-color: transparent;
+}
+
+.workspace-main::-webkit-scrollbar-button {
+    display: none;
+}
+
+.workspace-main::-webkit-scrollbar-button:start {
+    display: none;
+}
+
+.workspace-main::-webkit-scrollbar-button:end {
+    display: none;
+}
+
+.listTask {
+    padding: 1rem;
+    display: flex;
+}
+
+.taskCol {
+    /* flex-shrink: 0; */
+    position: relative;
+    margin: 0 10px;
+    background: white;
+    width: 20rem;
+    min-height: 4rem !important;
+    padding: 0.5rem;
+    border-radius: 10px;
+    transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(190, 190, 190),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+.addList {
+    min-height: initial;
+    height: 3rem !important;
+    display: flex;
+    align-items: center;
+}
+
+.addList .fa {
+    margin-right: 0.5rem;
+}
+
+.taskCol .fa{
+    cursor: pointer;
+}
+
+.fa-trash {
+    color: #970303;
+}
+
+.fa-edit {
+    color: #adad07;
+}
+
+.taskCol>.fa-trash{
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.taskCol>.fa-edit{
+    position: absolute;
+    right: 2rem;
+    top: 1rem;
+}
+
+.taskCol-name {
+    font-weight: bold;
+}
+
+.task {
+    border: solid thin #666;
+    border-radius: 10px;
+    margin: 1rem 0;
+    background-color: #fff;
+}
+
+.taskName {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid thin #666;
+    border-radius: 0.5rem 0.5rem 0 0;
+    padding: 0.5rem;
+}
+
+.taskDesc {
+    padding: 0.5rem;
+}
+
+.taskUser {
+    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: orange;
+    border-radius: 50%;
+}
+
+.addTask {
+    cursor: pointer;
+}
+
+
+/* Drag Drop */
+.cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .example-box:last-child {
+    border: none;
+  }
+
+.addContent {
+    text-align: center;
+    position: fixed;
+    width: 30rem;
+    min-height: 15rem;
+    top: calc(50% - 7.5rem);
+    left: calc(50% - 15rem);
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 15px 15px 30px #ffffff,
+    -15px -15px 30px #666666;
+}
+
+.addContent  .fa-close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}

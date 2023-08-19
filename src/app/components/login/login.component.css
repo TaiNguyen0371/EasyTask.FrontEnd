@@ -1,0 +1,102 @@
+.container {
+  margin: 0 auto;
+}
+
+.row {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  height: 35rem;
+}
+
+.row > div {
+  padding: 1rem;
+}
+
+.col-lg-6 > h1 {
+  margin-top: 2rem;
+}
+
+.col-lg-6 > form {
+  margin: 2rem 0;
+}
+
+.col-lg-6 .form-group {
+  margin: 2rem 0;
+  position: relative;
+}
+
+.col-lg-6 .form-control {
+  height: 3rem;
+  padding: 0 0.5rem;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.form-alert {
+  color: #ff0000;
+  font-style: italic;
+}
+
+.form-group > .error-message {
+  position: absolute;
+  bottom: -50%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-style: italic;
+}
+
+.form-group > .error-message > span {
+  color: #f00000;
+}
+
+.col-lg-6 .form-group > label {
+  position: absolute;
+  top: calc(50% - 12px);
+  margin-left: 0.5rem;
+  pointer-events: none;
+  transition: ease-in-out 0.2s;
+}
+
+.col-lg-6 .form-group:has(.form-control:focus) > label {
+  top: -65%;
+}
+
+.col-lg-6 .form-group:has(.form-control:not(:placeholder-shown)) > label {
+  top: -65%;
+}
+
+.col-lg-6 span {
+  display: block;
+  text-align: center;
+}
+
+.col-lg-6 span > label {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.col-lg-6 span > label:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* Handle Overlay */
+.overlay {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background: url("/assets/imgs/interfaces/ha-long-bay-travel-guide-from-a-to-z-amazingthingsinvietnam-01.jpg");
+  background-size: cover;
+  border-radius: 10px;
+  transition: ease-in-out 0.6s;
+}
+
+.row:has(#showSignUp:checked) .overlay {
+  right: 50%;
+  background: url("/assets/imgs/interfaces/Son-Doong-Cave-1.webp");
+  background-size: 100%;
+}

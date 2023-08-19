@@ -1,0 +1,147 @@
+<main>
+    <div class="container">
+        <div class="row workspace-nav d-flex justify-content-between align-items-center">
+            <div class="col-lg-3 workspace-name">{{workspace.name}}</div>
+            <div class="col-lg-3 text-end dropdown open">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    Your team
+                </button>
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                    <button *ngFor="let user of userList" class="dropdown-item" href="#">{{user.fullName}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="workspace-main">
+            <div cdkDropList cdkDropListGroup cdkDropListData="listTasks" cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropListTask($event)" class="listTask" >
+                <div 
+                    cdkDrag cdkDropList
+                    (cdkDropListDropped)="dropTask($event, tasks._id)"
+                    [cdkDropListData]="tasks.tasks"
+                    [id]="tasks._id"
+                    cdkDragData="tasks"
+                    *ngFor="let tasks of listTasks" class="taskCol">
+                        <span class="taskCol-name">{{tasks.name}}</span>
+                        <div cdkDrag [cdkDragData]="task" *ngFor="let task of tasks.tasks" class="task">
+                            <div class="taskName" [style.background-color]="task.color">
+                                <span>{{task.name}}</span>
+                                <div>
+                                    <i (click)="toggleContent('edit-task',task._id)" class="fa fa-edit"></i>
+                                    <i (click)="deleteTask(task._id)" class="fa fa-trash"></i>
+                                </div>
+                            </div>
+                            <p class="taskDesc">{{task.description}}</p>
+                            <span class="taskUser">{{getUser(task.idUser)}}</span>
+                        </div>
+                        <i (click)="toggleContent('edit-list',tasks._id)" class="fa fa-edit"></i>
+                        <i (click)="deleteList(tasks._id)" class="fa fa-trash"></i>
+                        <div (click)="toggleContent('add-task',tasks._id)" class="addTask">
+                            <i class="fa fa-plus"></i>
+                            Add a task
+                        </div>
+                </div>
+                <div (click)="toggleContent('add-list')" class="taskCol addList">
+                    <i class="fa fa-plus"></i> 
+                    <span>Add a list</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isOpenAddTask" class="addContent">
+        <i (click)="toggleContent('add-task')" class="fa fa-close"></i>
+        <h2>Add new task</h2>
+        <form action="">
+            <div class="form-group text-start my-2">
+                <label for="">Name: </label>
+                <input type="text" name="taskName" class="form-control my-2" [(ngModel)]="formAddTask.name" name="workspaceName" placeholder="Task name" required>
+            </div>
+            <div class="form-group text-start my-2">
+                <label for="taskColor">Color:</label> <br>
+                <input 
+                    class="form-control my-2 w-25"
+                    type="color" name="taskColor"
+                    id="taskColor" [(ngModel)]="formAddTask.color"
+                    list="colorOptions"
+                >
+            </div>
+            <div class="form-group text-start my-2">
+                <label for="">User: </label>
+                <select class="form-control" name="taskUser" [(ngModel)]="formAddTask.idUser">
+                    <option value="" disabled>Select user</option>
+                    <option *ngFor="let user of userList" [value]="user._id">{{user.fullName}}</option>
+                </select>
+            </div>
+            <div class="form-group text-start my-2">
+                <label for="taskDescription">Description: </label> <br>
+                <textarea 
+                    name="taskDesc" class="form-control p-2 my-2"
+                    id="taskDescription w-100" [(ngModel)]="formAddTask.description"></textarea>
+            </div>
+        </form>
+        <app-custombtn (clickEvent)="handleAddTask()" [buttonText]="'Add'"></app-custombtn>
+    </div>
+    <div *ngIf="isOpenAddList" class="addContent">
+        <i (click)="toggleContent('add-list')" class="fa fa-close"></i>
+        <h2>Add new list</h2>
+        <div class="form-group">
+            <input type="text" class="form-control my-3 mb-4" [(ngModel)]="addListName" name="workspaceName" placeholder="List name" required>
+        </div>
+        <app-custombtn (clickEvent)="handleAddList()" [buttonText]="'Add'"></app-custombtn>
+    </div>
+    <div *ngIf="isOpenEditList" class="addContent">
+        <i (click)="toggleContent('edit-list')" class="fa fa-close"></i>
+        <h2>Edit list</h2>
+        <div class="form-group">
+            <input type="text" class="form-control my-3 mb-4" [value]="editListName" [(ngModel)]="editListName" name="workspaceName" placeholder="List name" required>
+        </div>
+        <app-custombtn (clickEvent)="handleEditList()" [buttonText]="'Save'"></app-custombtn>
+    </div>
+    <div *ngIf="isOpenEditTask" class="addContent">
+        <i (click)="toggleContent('edit-task')" class="fa fa-close"></i>
+        <h2>Edit task</h2>
+        <form action="">
+            <div class="form-group text-start my-2">
+                <label for="">Name: </label>
+                <input 
+                    type="text" name="taskName" [value]="formEditTask.name" 
+                    class="form-control my-2" [(ngModel)]="formEditTask.name" 
+                    name="workspaceName" placeholder="Task name" required>
+            </div>
+            <div class="form-group text-start my-2">
+                <label for="taskColor">Color:</label> <br>
+                <input 
+                    class="form-control my-2 w-25"
+                    type="color" name="taskColor" 
+                    [value]="formEditTask.color"
+                    id="taskColor" [(ngModel)]="formEditTask.color"
+                    list="colorOptions"
+                >
+            </div>
+            <div class="form-group text-start my-2">
+                <label for="">User: </label>
+                <select class="form-control my-2" name="taskUser" [(ngModel)]="formEditTask.idUser">
+                    <option value="" disabled>Select user</option>
+                    <option *ngFor="let user of userList" [value]="user._id">{{user.fullName}}</option>
+                </select>
+            </div>
+            <div class="form-group text-start my-2">
+                <label for="taskDescription">Description: </label> <br>
+                <textarea 
+                    class="form-control p-2 my-2"
+                    name="taskDesc" id="taskDescription w-100" 
+                    [value]="formEditTask.description" [(ngModel)]="formEditTask.description"
+                >
+                </textarea>
+            </div>
+        </form>
+        <app-custombtn (clickEvent)="handleEditTask()" [buttonText]="'Save'"></app-custombtn>
+    </div>
+    <datalist id="colorOptions">
+        <option>#00ff00</option>
+        <option>#0000ff</option>
+        <option>#4F709C</option>
+        <option>#98EECC</option>
+        <option>#B799FF</option>
+        <option>#F266AB</option>
+    </datalist>
+</main>

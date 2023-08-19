@@ -1,0 +1,95 @@
+<main>
+  <div class="container w-50">
+    <div class="row mt-5">
+      <div class="col-lg-6 signIn">
+        <h1 class="text-center">Sign In</h1>
+        <form [formGroup]="frmSignIn" (ngSubmit)="signIn()">
+          <span class="form-alert">{{ signInAlert }}</span>
+          <div class="form-group">
+            <label for="">Username</label>
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              placeholder=" "
+              required
+              formControlName="username"
+              [(ngModel)]="formSignIn.userName"
+            />
+          </div>
+          <div class="form-group">
+            <label for="">Password</label>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              placeholder=" "
+              required
+              formControlName="password"
+              [(ngModel)]="formSignIn.password"
+            />
+          </div>
+          <div class="btns text-center">
+            <app-custombtn [buttonText]="'Sign In'"></app-custombtn>
+          </div>
+        </form>
+        <span>
+          Do not have account?
+          <label for="showSignUp" class="toSignUp">Sign Up</label>
+        </span>
+        <input type="checkbox" id="showSignUp" hidden />
+      </div>
+      <div class="col-lg-6 signUp">
+        <h1 class="text-center">Sign Up</h1>
+        <form [formGroup]="frmSignUp" action="" (ngSubmit)="signUp()">
+          <span class="form-alert">{{ signUpAlert }}</span>
+          <div class="form-group">
+            <label for="">Fullname</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              name="su-fullname"
+              placeholder=" "
+              formControlName="fullname"
+              [(ngModel)]="formSignUp.fullName"
+              />
+          </div>
+          <div class="form-group">
+            <label for="">Username</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              name="su-username"
+              placeholder=" "
+              formControlName="username"
+              [(ngModel)]="formSignUp.userName"
+              />
+          </div>
+          <div class="form-group">
+            <label for="">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="su-password"
+              placeholder=" "
+              formControlName="password"
+              [(ngModel)]="formSignUp.password"
+            />
+          </div>
+          <div class="btns text-center">
+            <app-custombtn [buttonText]="'Sign Up'"></app-custombtn>
+          </div>
+        </form>
+        <span
+          >Had account?
+          <label for="showSignUp" class="toSignUp">Sign In</label></span
+        >
+      </div>
+      <div class="overlay text-center">
+        <div>
+          <img src="/assets/imgs/interfaces/logo.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

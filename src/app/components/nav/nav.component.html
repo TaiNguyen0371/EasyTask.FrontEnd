@@ -1,0 +1,23 @@
+<nav>
+    <ul class="nav justify-content-between align-items-center">
+        <li class="active nav-item d-flex">
+            <a class="nav-link active text-dark"  [routerLink]="[ '']" aria-current="page">Home</a>
+            <a class="nav-link active text-dark"  [routerLink]="['/workspaces']" aria-current="page">Workspaces</a>
+        </li>
+        <li *ngIf="!isLogged" class="nav-item">
+            <a class="nav-link text-dark" [routerLink]="[ '/login']">Login</a>
+        </li>
+        <li *ngIf="isLogged" class="nav-item">
+            <div class="dropdown">
+                <div class="dropdown-hover">
+                    <span>{{summaryName}}</span>
+                </div>
+                <div class="dropdown-content">
+                    <ul class="p-0">
+                        <li (click)="signOut()">Sign out</li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    </ul>
+</nav>
